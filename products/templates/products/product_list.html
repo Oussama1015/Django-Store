@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    <style>
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Our Products</h1>
+    {% for product in products %}
+        <div class="product">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <p>Price: ${{ product.price }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>
