@@ -10,10 +10,38 @@
             margin: 10px;
             border-radius: 5px;
         }
+        .filters {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+        .search-form {
+            margin-bottom: 15px;
+        }
+        .category-filter {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
-    <h1>Our Products by Category</h1>
+    <h1>Our Products</h1>
+    
+    <div class="filters">
+        <form method="get" class="search-form">
+            <input type="text" name="search" value="{{ search_query }}" placeholder="Search products...">
+            <select name="category">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.name }}" {% if category.name == current_category %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+
     {% regroup products by category as category_list %}
     {% for category in category_list %}
         <h2>{{ category.grouper }}</h2>
@@ -25,5 +53,9 @@
             </div>
         {% endfor %}
     {% endfor %}
+
+    {% if not products %}
+        <p>No products found.</p>
+    {% endif %}
 </body>
 </html>
