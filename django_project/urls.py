@@ -20,5 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include('products.urls')),
-    path('', include('products.urls')),  # Redirect root to products
+    path('', include('products.urls', namespace='products_root')),  # Different namespace for root
 ]
