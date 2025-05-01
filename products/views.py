@@ -1,7 +1,9 @@
 
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
+from rest_framework import viewsets
 from .models import Product, Category
+from .serializers import ProductSerializer, CategorySerializer
 
 def product_list(request):
     products = Product.objects.all()
@@ -37,3 +39,11 @@ def category_detail(request, category_name):
         'category': category,
         'products': products
     })
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
