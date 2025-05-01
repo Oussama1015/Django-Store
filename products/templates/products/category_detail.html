@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ category.name }}</title>
+    <style>
+        .category-detail {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .back-link {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-link">
+        <a href="{% url 'products:product_list' %}">← Back to Products</a>
+    </div>
+    
+    <div class="category-detail">
+        <h1>{{ category.name }}</h1>
+        <p>{{ category.description }}</p>
+        
+        <h2>Products in this category:</h2>
+        {% for product in products %}
+            <div class="product">
+                <h3><a href="{% url 'products:product_detail' product.id %}">{{ product.name }}</a></h3>
+                <p>{{ product.description|truncatewords:30 }}</p>
+                <p>Price: ${{ product.price }}</p>
+            </div>
+        {% empty %}
+            <p>No products found in this category.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
